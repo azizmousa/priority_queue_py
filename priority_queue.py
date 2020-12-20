@@ -11,23 +11,42 @@ class PriorityQueue:
 		self.__tail = None
 		self.__size = 0
 
-
+	# push item by the priority order
 	def push(self, value, priority = 0):
-		if not typeof(priority) is int:
+		if not type(priority) is int:
 			raise Exceptoin("Priority should be an interger value.")
 		node = Node(value, int(priority))
-		itr = self.__head
-		while itr != None and itr.priority >= node.priority:
-			itr = itr.next_ptr
 
-		if itr = None:
+		# handel the empty queue
+		if self.__tail == None:
 			self.__tail = node
+			self.__head = node
 		else:
-			itr.prev_ptr.next_ptr = node
-			node.prev_ptr = itr.prev_ptr
-			node.next_ptr = itr
-			itr.prev_ptr = node
+			# handel None empty queue
+			itr = self.__head
+			while itr !=None and itr.priority >= node.priority:
+				itr = itr.next_ptr
 
-		if self.__head = None:
-			self.__head = self.__tail
+			# if there is no lower priority
+			if itr == None:
+				self.__tail.next_ptr = node
+				node.prev_ptr = self.__tail
+				self.__tail = node
+			else:
+				# if the iterator node was the head
+				if itr.prev_ptr != None:
+					itr.prev_ptr.next_ptr = node
+				else:
+					self.__head = node
+				node.prev_ptr = itr.prev_ptr
+				node.next_ptr = itr
+				itr.prev_ptr = node
 
+
+
+
+	def show(self):
+		itr = self.__head
+		while itr != None:
+			print(itr.value)
+			itr = itr.next_ptr
