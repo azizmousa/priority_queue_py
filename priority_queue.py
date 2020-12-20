@@ -42,11 +42,19 @@ class PriorityQueue:
 				node.next_ptr = itr
 				itr.prev_ptr = node
 
-
+	def pop(self):
+		if self.__head == self.__tail:
+			self.__head = None
+			self.__tail = None
+		else:
+			self.__head = self.__head.next_ptr
+			self.__head.prev_ptr = None
 
 
 	def show(self):
+		print("=================================")
 		itr = self.__head
 		while itr != None:
 			print(itr.value)
 			itr = itr.next_ptr
+		print("=================================")
