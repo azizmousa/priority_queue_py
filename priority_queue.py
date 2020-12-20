@@ -51,6 +51,10 @@ class PriorityQueue:
 			self.__head.prev_ptr = None
 
 
+	def front(self):
+		return self.__head.value
+
+
 	def show(self):
 		print("=================================")
 		itr = self.__head
